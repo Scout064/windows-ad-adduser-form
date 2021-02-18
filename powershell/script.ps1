@@ -1,0 +1,3 @@
+$secureString = convertto-securestring Qwertz1234! -asplaintext -force
+New-ADUser -Name:"Tim Hallo" -GivenName:"Tim" -Surname:"Hallo" -SamAccountName:"TimHallo" -UserPrincipalName:"test@test.com" -Path:"OU=users,OU=moessner,DC=ad,DC=moessner,DC=be" -AccountPassword:$secureString -Enabled:$true
+Add-ADPrincipalGroupMembership -Identity:'CN=Tim Hallo,OU=users,OU=moessner,DC=ad,DC=moessner,DC=be' -MemberOf:'CN=ipsec_vpn,OU=groups,OU=moessner,DC=ad,DC=moessner,DC=be' -Server:"server2016.ad.moessner.be"
