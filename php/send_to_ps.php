@@ -11,7 +11,7 @@ $usn = $_POST['givenname'] . " " . $_POST['surname'];
 #Prepare the Variables for the Powershell
 $powershell1 = "".'$secureString'." = convertto-securestring $password -asplaintext -force\n";
 $powershell2 = "New-ADUser -Name:".$name." -GivenName:".$given_name." -Surname:".$surname." -SamAccountName:".$username." -UserPrincipalName:".$email." -Path:".escapeshellarg('OU=users,OU=anotherou,DC=ad,DC=fqdn,DC=tld')." -AccountPassword:".'$secureString'." -Enabled:".'$true'."\n";
-$powershell3 = "Add-ADPrincipalGroupMembership -Identity:'CN=$usn,OU=users,OU=anotherou,DC=ad,DC=fqdn,DC=tld' -MemberOf:'CN=$usergroup,OU=groups,OU=anotherou,DC=ad,DC=fqdn,DC=tld' -Server:".escapeshellarg('fqdn.of.ad.server')."";
+$powershell3 = "Add-ADPrincipalGroupMembership -Identity:'CN=$usn,OU=$usergroup,OU=users,OU=anotherou,DC=ad,DC=fqdn,DC=tld' -MemberOf:'CN=$usergroup,OU=groups,OU=anotherou,DC=ad,DC=fqdn,DC=tld' -Server:".escapeshellarg('fqdn.of.ad.server')."";
 #Prepare the Variable for the script and Action to be taken if unable to open or run
 $script = fopen("script.ps1", "w") or die("Unable to open file!");
 #Prepare the Powershell Strings and pass them to the Script
